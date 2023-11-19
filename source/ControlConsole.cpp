@@ -1,5 +1,4 @@
 #include <ControlConsole.hpp>
-#include <windows.h>
 
 void ControlConsole::set_visible_cursor(bool visible) {
     this->visible_cursor = visible;
@@ -16,7 +15,7 @@ void ControlConsole::move_cursor(short x, short y) {
     SetConsoleCursorPosition(console_handle, position);
 }
 
-void ControlConsole::change_color(int background, int foreground) {
+void ControlConsole::change_color(Color background, Color foreground) {
     HANDLE console_handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(console_handle, background * 16 + foreground);
+    SetConsoleTextAttribute(console_handle, static_cast<int>(background) * 16 + static_cast<int>(foreground));
 }

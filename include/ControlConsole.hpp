@@ -1,7 +1,8 @@
 #pragma once
 #ifndef CONTROL_CONSOLE_HPP
 #define CONTROL_CONSOLE_HPP
-
+#include <Color.hpp>
+#include <windows.h>
 /**
  * @brief La clase ControlConsole representa una clase de control para administrar la ventana de la consola.
  */
@@ -33,7 +34,7 @@ public:
      * @param background El código que representa el color de fondo deseado.
      * @param foreground El código que representa el color de primer plano deseado.
      */
-    void change_color(int background, int foreground);
+    void change_color(Color background, Color foreground);
 };
 
 #endif // CONTROL_CONSOLE_HPP
