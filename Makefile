@@ -1,4 +1,4 @@
-# Creado por Davis Cartagena - Lunes, 25 de marzo de 2019 11:59:59
+# Creado por Davis Cartagena - Sábado, 18 de Noviembre del 2023
 # Makefile para compilar el proyecto Aparked
 
 # Definicion de carpetas
@@ -43,6 +43,8 @@ DIRS	:
 	mkdir -p $(OBJDIR)
 	mkdir -p $(TESTBINDIR)
 info	:
+	@echo "Creado por Davis Cartagena - Sabado, 18 de Noviembre del 2023"
+	@echo "proyecto Aparked"
 	@echo "SOURCE: $(SOURCE)"
 	@echo "OBJECTS: $(OBJECTS)"
 	@echo "TESTOBJ: $(TESTOBJ)"

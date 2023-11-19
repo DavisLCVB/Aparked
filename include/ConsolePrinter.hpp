@@ -15,6 +15,8 @@ template <class Element>
 class ConsolePrinter {
 private:
     ControlConsole *console;
+    const int MAX_WIDTH = 120;
+    const int MAX_HEIGHT = 30;
 
 public:
     /**
@@ -23,6 +25,24 @@ public:
      * @param console_controller Puntero al controlador de la consola.
      */
     ConsolePrinter(ControlConsole *console_controller);
+
+    /**
+     * @brief Establece el controlador de la consola.
+     *
+     * @param console_controller Puntero al controlador de la consola.
+     */
+    void set_console(ControlConsole *console_controller) {
+        this->console = console_controller;
+    }
+
+    /**
+     * @brief Devuelve el controlador de la consola.
+     *
+     * @return ControlConsole* Un puntero al controlador de la consola.
+     */
+    ControlConsole *get_console() {
+        return this->console;
+    }
 
     /**
      * @brief Imprime un elemento en la posición (x, y) de la consola.
@@ -122,7 +142,7 @@ public:
     void print_vertical_line(int x, int y, int length, Element element);
 
     /**
-     * Imprime una línea vertical en la consola.
+     * @brief Imprime una línea vertical en la consola.
      *
      * @param x La coordenada x de la posición inicial de la línea.
      * @param y La coordenada y de la posición inicial de la línea.
@@ -134,7 +154,7 @@ public:
     void print_vertical_line(int x, int y, int length, Element element, Color background, Color foreground);
 
     /**
-     * Imprime una línea diagonal en la consola.
+     * @brief Imprime una línea diagonal en la consola.
      *
      * @param x La coordenada x de la posición inicial de la línea.
      * @param y La coordenada y de la posición inicial de la línea.
@@ -146,7 +166,7 @@ public:
     void print_diagonal_line(int x, int y, int width, int step, Element element, bool left_to_right = true);
 
     /**
-     * Imprime una línea diagonal en la consola.
+     * @brief Imprime una línea diagonal en la consola.
      *
      * @param x La coordenada x de la posición inicial de la línea.
      * @param y La coordenada y de la posición inicial de la línea.
@@ -158,6 +178,34 @@ public:
      * @param left_to_right Determina la dirección de la línea (de izquierda a derecha o de derecha a izquierda).
      */
     void print_diagonal_line(int x, int y, int width, int step, Element element, Color background, Color foreground, bool left_to_right = true);
+
+    /**
+     * @brief Prints a diagonal line of elements on the console, starting from the specified coordinates (x, y).
+     * The line is filled with the specified element, with a given width and step.
+     * By default, the line is filled from left to right, but this can be changed by setting the left_to_right parameter to false.
+     *
+     * @param x The x-coordinate of the starting point.
+     * @param y The y-coordinate of the starting point.
+     * @param width The width of the diagonal line.
+     * @param step The step size between each element in the line.
+     * @param element The element to fill the line with.
+     * @param left_to_right Whether the line should be filled from left to right (default) or right to left.
+     */
+    void print_fill_diagonal(int x, int y, int width, int step, Element element, bool left_to_right = true);
+
+    /**
+     * @brief Prints a diagonal pattern of the specified element on the console.
+     *
+     * @param x The starting x-coordinate of the pattern.
+     * @param y The starting y-coordinate of the pattern.
+     * @param width The width of the pattern.
+     * @param step The step size between each element in the pattern.
+     * @param element The element to be printed.
+     * @param background The background color of the pattern.
+     * @param foreground The foreground color of the pattern.
+     * @param left_to_right Flag indicating whether the pattern should be printed from left to right (default: true).
+     */
+    void print_fill_diagonal(int x, int y, int width, int step, Element element, Color background, Color foreground, bool left_to_right = true);
 };
 
 /**
@@ -232,6 +280,8 @@ void ConsolePrinter<Element>::print_matrix(int x, int y, std::vector<std::vector
     for (int i = 0; i < matrix.size(); i++) {
         for (int j = 0; j < matrix.at(i).size(); j++) {
             this->print(x + j, y + i, matrix.at(i).at(j));
+            if (x >= MAX_WIDTH || y >= MAX_HEIGHT)
+                break;
         }
     }
 }
@@ -245,10 +295,11 @@ void ConsolePrinter<Element>::print_matrix(int x, int y, std::vector<std::vector
 template <typename Element>
 void ConsolePrinter<Element>::print_diagonal_line(int x, int y, int width, int step, Element element, bool left_to_right) {
     step = std::abs(step);
-    left_to_right ? true : step = -step;
     for (int i = 0; i < width; i += step) {
-        this->print(x + i, y, element);
-        y++;
+        this->print((left_to_right ? x + i : x - i), y, element);
+        y += step;
+        if (x >= MAX_WIDTH || y >= MAX_HEIGHT)
+            break;
     }
 }
 
@@ -256,6 +307,24 @@ template <typename Element>
 void ConsolePrinter<Element>::print_diagonal_line(int x, int y, int width, int step, Element element, Color background, Color foreground, bool left_to_right) {
     this->console->change_color(background, foreground);
     this->print_diagonal_line(x, y, width, step, element, left_to_right);
+}
+
+template <typename Element>
+void ConsolePrinter<Element>::print_fill_diagonal(int x, int y, int width, int step, Element element, bool left_to_right) {
+    step = std::abs(step);
+    for (int i = width; i > 0; i -= step) {
+        if (x >= MAX_WIDTH || y >= MAX_HEIGHT)
+            break;
+        this->print_horizontal_line(x, y, i, element);
+        left_to_right ? x++ : false;
+        y++;
+    }
+}
+
+template <typename Element>
+void ConsolePrinter<Element>::print_fill_diagonal(int x, int y, int width, int step, Element element, Color background, Color foreground, bool left_to_right) {
+    this->console->change_color(background, foreground);
+    this->print_fill_diagonal(x, y, width, step, element, left_to_right);
 }
 
 #endif // CONSOLE_PRINTER_HPP

@@ -34,7 +34,12 @@ public:
      * @param background El código que representa el color de fondo deseado.
      * @param foreground El código que representa el color de primer plano deseado.
      */
-    void change_color(Color background, Color foreground);
+    void change_color(Color background, Color foreground, bool all_screen = false);
+
+    /**
+     * @brief Limpia la pantalla.
+     */
+    void clear_screen();
 };
 
 #endif // CONTROL_CONSOLE_HPP

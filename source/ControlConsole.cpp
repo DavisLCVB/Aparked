@@ -15,7 +15,18 @@ void ControlConsole::move_cursor(short x, short y) {
     SetConsoleCursorPosition(console_handle, position);
 }
 
-void ControlConsole::change_color(Color background, Color foreground) {
+void ControlConsole::change_color(Color background, Color foreground, bool all_screen) {
     HANDLE console_handle = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(console_handle, static_cast<int>(background) * 16 + static_cast<int>(foreground));
+    if (all_screen) {
+        CONSOLE_SCREEN_BUFFER_INFO screen_buffer_info;
+        GetConsoleScreenBufferInfo(console_handle, &screen_buffer_info);
+        COORD position = {0, 0};
+        DWORD written;
+        FillConsoleOutputAttribute(console_handle, static_cast<int>(background) * 16 + static_cast<int>(foreground), screen_buffer_info.dwSize.X * screen_buffer_info.dwSize.Y, position, &written);
+    }
+}
+
+void ControlConsole::clear_screen() {
+    system("cls");
 }
