@@ -5,6 +5,7 @@
 #include <Color.hpp>
 #include <ConsolePrinter.hpp>
 #include <ControlConsole.hpp>
+#include <Resources.hpp>
 
 /**
  * @brief Clase que representa los marcos de la consola.

@@ -51,7 +51,7 @@ public:
      * @param y Posición vertical.
      * @param element Elemento a imprimir.
      */
-    void print(int x, int y, Element element);
+    void print(int x, int y, Element element, bool vertical = false);
 
     /**
      * @brief Imprime un elemento en la posición (x, y) de la consola con colores personalizados.
@@ -62,7 +62,7 @@ public:
      * @param background Color de fondo.
      * @param foreground Color de primer plano.
      */
-    void print(int x, int y, Element element, Color background, Color foreground);
+    void print(int x, int y, Element element, Color background, Color foreground, bool vertical = false);
 
     /**
      * @brief Imprime un rectángulo en la consola.
@@ -85,18 +85,11 @@ public:
      * @param element El elemento a imprimir dentro del rectángulo.
      * @param fill Indica si se debe rellenar el rectángulo con el elemento o no (por defecto es false).
      * @param background El color de fondo del rectángulo.
-     * @param foreground El color de primer plano del rectángulo.
+     * @param foreground1 El color de primer plano del rectángulo.
+     * @param foreground2 El color de primer plano del rectángulo. Si no se especifica, se utiliza el mismo color que foreground1.
+     * @param foreground3 El color de primer plano del rectángulo. Si no se especifica, se utiliza el mismo color que foreground1.
      */
     void print_rectangle(int x, int y, int width, int height, Element element, Color background, Color foreground, bool fill = false);
-
-    /**
-     * @brief Imprime una matriz en la consola.
-     *
-     * @param x Posición horizontal de la matriz.
-     * @param y Posición vertical de la matriz.
-     * @param matrix Matriz a imprimir.
-     */
-    void print_matrix(int x, int y, std::vector<std::vector<Element>> matrix);
 
     /**
      * @brief Imprime una matriz en la consola con colores de fondo y primer plano personalizados.
@@ -107,7 +100,7 @@ public:
      * @param background El color de fondo de la matriz.
      * @param foreground El color del primer plano de la matriz.
      */
-    void print_matrix(int x, int y, std::vector<std::vector<Element>> matrix, Color background, Color foreground);
+    void print_matrix(int x, int y, std::vector<std::vector<Element>> matrix, Color background, Color foreground1, Color foreground2 = Color::BLACK, Color foreground3 = Color::BLACK);
 
     /**
      * @brief Imprime una línea horizontal en la consola.
@@ -218,15 +211,23 @@ ConsolePrinter<Element>::ConsolePrinter(ControlConsole *console_controller) {
 }
 
 template <typename Element>
-void ConsolePrinter<Element>::print(int x, int y, Element element) {
+void ConsolePrinter<Element>::print(int x, int y, Element element, bool vertical) {
     this->console->move_cursor(x, y);
-    std::cout << element;
+    if (!vertical) {
+        std::cout << element;
+    } else {
+        for (auto c : element) {
+            this->console->move_cursor(x, y);
+            std::cout << c;
+            y++;
+        }
+    }
 }
 
 template <typename Element>
-void ConsolePrinter<Element>::print(int x, int y, Element element, Color background, Color foreground) {
+void ConsolePrinter<Element>::print(int x, int y, Element element, Color background, Color foreground, bool vertical) {
     this->console->change_color(background, foreground);
-    this->print(x, y, element);
+    this->print(x, y, element, vertical);
 }
 
 template <typename Element>
@@ -276,20 +277,21 @@ void ConsolePrinter<Element>::print_rectangle(int x, int y, int width, int heigh
 }
 
 template <typename Element>
-void ConsolePrinter<Element>::print_matrix(int x, int y, std::vector<std::vector<Element>> matrix) {
-    for (int i = 0; i < matrix.size(); i++) {
-        for (int j = 0; j < matrix.at(i).size(); j++) {
-            this->print(x + j, y + i, matrix.at(i).at(j));
-            if (x >= MAX_WIDTH || y >= MAX_HEIGHT)
-                break;
+void ConsolePrinter<Element>::print_matrix(int x, int y, std::vector<std::vector<Element>> matrix, Color background, Color foreground1, Color foreground2, Color foreground3) {
+    this->console->change_color(background, foreground1);
+    for (int i = 0; i < (int)matrix.size(); i++) {
+        for (int j = 0; j < (int)matrix.at(i).size(); j++) {
+            if (matrix.at(i).at(j) == "0") {
+                this->print(x + j, y + i, matrix.at(i).at(j), foreground1, foreground1);
+            } else if (matrix.at(i).at(j) == "1") {
+                this->print(x + j, y + i, matrix.at(i).at(j), foreground2, foreground2);
+            } else if (matrix.at(i).at(j) == "2") {
+                this->print(x + j, y + i, matrix.at(i).at(j), foreground3, foreground3);
+            }else{
+                this->print(x + j, y + i, matrix.at(i).at(j), background, foreground1);
+            };
         }
     }
-}
-
-template <typename Element>
-void ConsolePrinter<Element>::print_matrix(int x, int y, std::vector<std::vector<Element>> matrix, Color background, Color foreground) {
-    this->console->change_color(background, foreground);
-    this->print_matrix(x, y, matrix);
 }
 
 template <typename Element>
