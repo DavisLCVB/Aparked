@@ -40,6 +40,12 @@ public:
      * @brief Limpia la pantalla.
      */
     void clear_screen();
+
+    /**
+     * @brief Obtiene la posición actual del cursor en la ventana de la consola.
+     * @return Un objeto POINT que representa la posición actual del cursor.
+     */
+    POINT get_cursor_position();
 };
 
 #endif // CONTROL_CONSOLE_HPP

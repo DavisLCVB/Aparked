@@ -27,6 +27,14 @@ void ControlConsole::change_color(Color background, Color foreground, bool all_s
     }
 }
 
+POINT ControlConsole::get_cursor_position() {
+    HANDLE console_handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_SCREEN_BUFFER_INFO screen_buffer_info;
+    GetConsoleScreenBufferInfo(console_handle, &screen_buffer_info);
+    POINT cursor_position = {screen_buffer_info.dwCursorPosition.X, screen_buffer_info.dwCursorPosition.Y};
+    return cursor_position;
+}
+
 void ControlConsole::clear_screen() {
     system("cls");
 }
