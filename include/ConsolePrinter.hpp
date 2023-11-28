@@ -2,6 +2,7 @@
 #define CONSOLE_PRINTER_HPP
 #include <Color.hpp>
 #include <ControlConsole.hpp>
+#include <Styles.hpp>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -65,6 +66,26 @@ public:
     void print(int x, int y, Element element, Color background, Color foreground, bool vertical = false);
 
     /**
+     * @brief Imprime un caracter en las coordenadas (x, y) de la consola.
+     *
+     * @param x Posición horizontal.
+     * @param y Posición vertical.
+     * @param element Elemento a imprimir.
+     */	
+    void print(int x, int y, char element);
+
+    /**
+     * @brief Imprime un caracter en las coordenadas (x, y) de la consola con colores personalizados.
+     * 
+     * @param x Posición horizontal.
+     * @param y Posición vertical.
+     * @param element Elemento a imprimir.
+     * @param background Color de fondo.
+     * @param foreground Color de primer plano.
+     */
+    void print(int x, int y, char element, Color background, Color foreground);
+
+    /**
      * @brief Imprime un rectángulo en la consola.
      *
      * @param x Posición horizontal del rectángulo.
@@ -75,6 +96,19 @@ public:
      * @param fill Indica si se debe rellenar el rectángulo o no (valor predeterminado: false).
      */
     void print_rectangle(int x, int y, int width, int height, Element element, bool fill = false);
+
+    /**
+     * @brief Imprime un rectángulo en la consola.
+     *
+     * @param x Posición horizontal del rectángulo.
+     * @param y Posición vertical del rectángulo.
+     * @param width Ancho del rectángulo.
+     * @param height Altura del rectángulo.
+     * @param style Estilo del rectángulo.
+     * @param fill Indica si se debe rellenar el rectángulo o no (valor predeterminado: false).
+     */
+    void print_rectangle(int x, int y, int width, int height, Styles style, bool fill = false);
+
     /**
      * @brief Imprime un rectángulo en la consola.
      *
@@ -85,11 +119,23 @@ public:
      * @param element El elemento a imprimir dentro del rectángulo.
      * @param fill Indica si se debe rellenar el rectángulo con el elemento o no (por defecto es false).
      * @param background El color de fondo del rectángulo.
-     * @param foreground1 El color de primer plano del rectángulo.
-     * @param foreground2 El color de primer plano del rectángulo. Si no se especifica, se utiliza el mismo color que foreground1.
-     * @param foreground3 El color de primer plano del rectángulo. Si no se especifica, se utiliza el mismo color que foreground1.
+     * @param foreground El color de primer plano del rectángulo.
      */
     void print_rectangle(int x, int y, int width, int height, Element element, Color background, Color foreground, bool fill = false);
+
+    /**
+     * @brief Imprime un rectángulo en la consola.
+     *
+     * @param x La coordenada x de la esquina superior izquierda del rectángulo.
+     * @param y La coordenada y de la esquina superior izquierda del rectángulo.
+     * @param width El ancho del rectángulo.
+     * @param height La altura del rectángulo.
+     * @param style El estilo del rectángulo.
+     * @param fill Indica si se debe rellenar el rectángulo con el elemento o no (por defecto es false).
+     * @param background El color de fondo del rectángulo.
+     * @param foreground El color de primer plano del rectángulo.
+     */
+    void print_rectangle(int x, int y, int width, int height, Styles style, Color background, Color foreground, bool fill = false);
 
     /**
      * @brief Imprime una matriz en la consola con colores de fondo y primer plano personalizados.
@@ -118,11 +164,33 @@ public:
      * @param x La coordenada x de inicio de la línea.
      * @param y La coordenada y de la línea.
      * @param length La longitud de la línea.
+     * @param style El estilo de la línea.
+     */
+    void print_horizontal_line(int x, int y, int length, Styles style);
+
+    /**
+     * Imprime una línea horizontal en la consola.
+     *
+     * @param x La coordenada x de inicio de la línea.
+     * @param y La coordenada y de la línea.
+     * @param length La longitud de la línea.
      * @param element El elemento a utilizar para la línea.
      * @param background El color de fondo de la línea.
      * @param foreground El color de primer plano de la línea.
      */
     void print_horizontal_line(int x, int y, int length, Element element, Color background, Color foreground);
+
+    /**
+     * @brief Imprime una línea horizontal en la consola.
+     *
+     * @param x La coordenada x de inicio de la línea.
+     * @param y La coordenada y de la línea.
+     * @param length La longitud de la línea.
+     * @param style El estilo de la línea.
+     * @param background El color de fondo de la línea.
+     * @param foreground El color de primer plano de la línea.
+     */
+    void print_horizontal_line(int x, int y, int length, Styles style, Color background, Color foreground);
 
     /**
      * @brief Imprime una línea vertical en la consola.
@@ -140,11 +208,33 @@ public:
      * @param x La coordenada x de la posición inicial de la línea.
      * @param y La coordenada y de la posición inicial de la línea.
      * @param length La longitud de la línea.
+     * @param style El estilo de la línea.
+     */
+    void print_vertical_line(int x, int y, int length, Styles style);
+
+    /**
+     * @brief Imprime una línea vertical en la consola.
+     *
+     * @param x La coordenada x de la posición inicial de la línea.
+     * @param y La coordenada y de la posición inicial de la línea.
+     * @param length La longitud de la línea.
      * @param element El elemento a utilizar para imprimir la línea.
      * @param background El color de fondo de la línea.
      * @param foreground El color de primer plano de la línea.
      */
     void print_vertical_line(int x, int y, int length, Element element, Color background, Color foreground);
+
+    /**
+     * @brief Imprime una línea vertical en la consola.
+     *
+     * @param x La coordenada x de la posición inicial de la línea.
+     * @param y La coordenada y de la posición inicial de la línea.
+     * @param length La longitud de la línea.
+     * @param style El estilo de la línea.
+     * @param background El color de fondo de la línea.
+     * @param foreground El color de primer plano de la línea.
+     */
+    void print_vertical_line(int x, int y, int length, Styles style, Color background, Color foreground);
 
     /**
      * @brief Imprime una línea diagonal en la consola.
@@ -231,10 +321,36 @@ void ConsolePrinter<Element>::print(int x, int y, Element element, Color backgro
 }
 
 template <typename Element>
+void ConsolePrinter<Element>::print(int x, int y, char element) {
+    this->console->move_cursor(x, y);
+    std::cout << element;
+}
+
+template <typename Element>
+void ConsolePrinter<Element>::print(int x, int y, char element, Color background, Color foreground) {
+    this->console->change_color(background, foreground);
+    this->print(x, y, element);
+}
+
+template <typename Element>
 void ConsolePrinter<Element>::print_horizontal_line(int x, int y, int length, Element element) {
     for (int i = 0; i < length; i++) {
         this->print(x + i, y, element);
     }
+}
+
+template <typename Element>
+void ConsolePrinter<Element>::print_horizontal_line(int x, int y, int length, Styles style) {
+    std::string style_string = styleToString(style);
+    for (int i = 0; i < length; i++) {
+        this->print(x + i, y, style_string.at(7));
+    }
+}
+
+template <typename Element>
+void ConsolePrinter<Element>::print_horizontal_line(int x, int y, int length, Styles style, Color background, Color foreground) {
+    this->console->change_color(background, foreground);
+    this->print_horizontal_line(x, y, length, style);
 }
 
 template <typename Element>
@@ -257,6 +373,20 @@ void ConsolePrinter<Element>::print_vertical_line(int x, int y, int length, Elem
 }
 
 template <typename Element>
+void ConsolePrinter<Element>::print_vertical_line(int x, int y, int length, Styles style) {
+    std::string style_string = styleToString(style);
+    for (int i = 0; i < length; i++) {
+        this->print(x, y + i, style_string.at(1));
+    }
+}
+
+template <typename Element>
+void ConsolePrinter<Element>::print_vertical_line(int x, int y, int length, Styles style, Color background, Color foreground) {
+    this->console->change_color(background, foreground);
+    this->print_vertical_line(x, y, length, style);
+}
+
+template <typename Element>
 void ConsolePrinter<Element>::print_rectangle(int x, int y, int width, int height, Element element, bool fill) {
     if (fill) {
         for (int i = 0; i < height; i++) {
@@ -276,6 +406,31 @@ void ConsolePrinter<Element>::print_rectangle(int x, int y, int width, int heigh
     this->print_rectangle(x, y, width, height, element, fill);
 }
 
+template<typename Element>
+void ConsolePrinter<Element>::print_rectangle(int x, int y, int width, int height, Styles style, bool fill) {
+    std::string style_string = styleToString(style);
+    if (fill) {
+        for (int i = 0; i < height; i++) {
+            this->print_horizontal_line(x, y + i, width, style, Color::BLACK, Color::BLACK);
+        }
+    } else {
+        this->print_horizontal_line(x, y, width, style);
+        this->print_horizontal_line(x, y + height - 1, width, style);
+        this->print_vertical_line(x, y, height, style);
+        this->print_vertical_line(x + width - 1, y, height, style);
+        this->print(x, y, style_string.at(10));
+        this->print(x + width - 1, y, style_string.at(2));
+        this->print(x, y + height - 1, style_string.at(3));
+        this->print(x + width - 1, y + height - 1, style_string.at(9));
+    }
+}
+
+template<typename Element>
+void ConsolePrinter<Element>::print_rectangle(int x, int y, int width, int height, Styles style, Color background, Color foreground, bool fill) {
+    this->console->change_color(background, foreground);
+    this->print_rectangle(x, y, width, height, style, fill);
+}
+
 template <typename Element>
 void ConsolePrinter<Element>::print_matrix(int x, int y, std::vector<std::vector<Element>> matrix, Color background, Color foreground1, Color foreground2, Color foreground3) {
     this->console->change_color(background, foreground1);
@@ -287,7 +442,7 @@ void ConsolePrinter<Element>::print_matrix(int x, int y, std::vector<std::vector
                 this->print(x + j, y + i, matrix.at(i).at(j), foreground2, foreground2);
             } else if (matrix.at(i).at(j) == "2") {
                 this->print(x + j, y + i, matrix.at(i).at(j), foreground3, foreground3);
-            }else{
+            } else {
                 this->print(x + j, y + i, matrix.at(i).at(j), background, foreground1);
             };
         }

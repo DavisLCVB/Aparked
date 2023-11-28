@@ -26,6 +26,10 @@ void ConsoleFrames::paint_main_menu() {
     printer->print(4, 6, "arcos", Color::LIGHT_CYAN, Color::BLACK);
     printer->print_matrix(40, 10, Resources::logo_estacionamiento, Color::CYAN, Color::CYAN, Color::WHITE);
     printer->print(41, 17, "A P A R K E D", Color::CYAN, Color::WHITE);
+    printer->print_rectangle(85, 10, 32, 3, Styles::Double, Color::WHITE, Color::BLACK);
+    printer->print(85, 9, "Ingrese su Usuario", Color::WHITE, Color::DARK_GRAY);
+    printer->print_matrix(98, 20, Resources::logo_grupo, Color::WHITE, Color::WHITE, Color::DARK_GRAY);
+    printer->print(99, 26, "Grupo", Color::WHITE, Color::DARK_GRAY);
 }
 
 void ConsoleFrames::paint_loading_screen() {
