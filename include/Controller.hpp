@@ -7,6 +7,7 @@
 #include <ConsolePrinter.hpp>
 #include <ConsoleReader.hpp>
 #include <ControlConsole.hpp>
+#include <CustomerManager.hpp>
 
 class Controller {
 private:
@@ -28,6 +29,7 @@ public:
     ConsoleReader *get_reader();
     void init_loading_bar();
     void receive_data();
+    void load_files();
 };
 
 #endif // CONTROLLER_HPP

@@ -11,7 +11,8 @@ Controller::Controller(ControlConsole *console, ConsolePrinter<std::string> *pri
     this->printer = printer;
     this->frames = frames;
     this->reader = reader;
-
+    
+    this->load_files();
     this->frames->init_screen();
     _getch();
     this->frames->paint_loading_screen();
@@ -34,6 +35,10 @@ void Controller::receive_data(){
     this->console->clear_screen();
     this->console->move_cursor(0, 0);
     this->printer->print(0, 0, input);
+}
+
+void Controller::load_files(){
+    CustomerManager::load_customers();
 }
 
 void Controller::set_console(ControlConsole *console) {

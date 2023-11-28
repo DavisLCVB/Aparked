@@ -21,4 +21,5 @@ enum class Color {
     WHITE = 15
 };
 
+Color int_to_Color(int cod);
 #endif // _COLOR_HPP_

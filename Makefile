@@ -54,3 +54,4 @@ clean	:
 	rm -f $(OBJDIR)/*
 	rm -f $(TESTBINDIR)/*
 	rm -rf build
+	rm -f *.o
