@@ -1,9 +1,7 @@
 #include <Color.hpp>
-#include <ConsoleFrames.hpp>
-#include <ConsolePrinter.hpp>
-#include <ControlConsole.hpp>
 #include <Controller.hpp>
 #include <conio.h>
+#include <ControlConsole>
 #include <iostream>
 #include <memory>
 #include <string>

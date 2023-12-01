@@ -5,7 +5,7 @@
 SOURCEDIR		:= source
 OBJDIR			:= build/obj
 BINDIR			:= build/bin
-INCLUDEDIR		:= -Iinclude
+INCLUDEDIR		:= -Iinclude -Isource
 TESTDIR 		:= test
 TESTBINDIR		:= build/test
 
@@ -52,6 +52,6 @@ info	:
 clean	:
 	rm -f $(BINDIR)/*
 	rm -f $(OBJDIR)/*
-	rm -f $(TESTBINDIR)/*
+	rm -rf $(TESTBINDIR)/*
 	rm -rf build
 	rm -f *.o

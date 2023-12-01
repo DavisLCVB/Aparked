@@ -3,8 +3,14 @@
 const std::string FileManager::dir = "files\\";
 
 void FileManager::write(std::string file_name, std::string data) {
+    if (!std::filesystem::exists(dir)) {
+        std::filesystem::create_directory(dir);
+    }
     std::ofstream file;
     file.open(dir + file_name);
+    if (!file.is_open()) {
+        printf("Error opening file %s\n", file_name.c_str());
+    }
     file << data;
     file.close();
 }

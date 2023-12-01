@@ -1,3 +1,4 @@
+#pragma once
 #ifndef CONSOLE_PRINTER_HPP
 #define CONSOLE_PRINTER_HPP
 #include <Color.hpp>
@@ -71,12 +72,12 @@ public:
      * @param x Posición horizontal.
      * @param y Posición vertical.
      * @param element Elemento a imprimir.
-     */	
+     */
     void print(int x, int y, char element);
 
     /**
      * @brief Imprime un caracter en las coordenadas (x, y) de la consola con colores personalizados.
-     * 
+     *
      * @param x Posición horizontal.
      * @param y Posición vertical.
      * @param element Elemento a imprimir.

@@ -23,6 +23,8 @@ void CustomerManager::save_customers() {
 void CustomerManager::load_customers() {
     std::vector<std::string> lines = FileManager::read("customers.txt");
     if(lines.empty()) {
+        printf("No customers found, creating new file...\n");
+        save_customers();
         return;
     }
     CustomerManager::customer_count = std::stoi(lines.at(0));

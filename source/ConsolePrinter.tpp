@@ -1,11 +1,11 @@
 #include <ConsolePrinter.hpp>
 
-template <typename Element>
+template <class Element>
 ConsolePrinter<Element>::ConsolePrinter(ControlConsole *console_controller) {
     this->console = console_controller;
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print(int x, int y, Element element, bool vertical) {
     this->console->move_cursor(x, y);
     if (!vertical) {
@@ -19,32 +19,32 @@ void ConsolePrinter<Element>::print(int x, int y, Element element, bool vertical
     }
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print(int x, int y, Element element, Color background, Color foreground, bool vertical) {
     this->console->change_color(background, foreground);
     this->print(x, y, element, vertical);
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print(int x, int y, char element) {
     this->console->move_cursor(x, y);
     std::cout << element;
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print(int x, int y, char element, Color background, Color foreground) {
     this->console->change_color(background, foreground);
     this->print(x, y, element);
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print_horizontal_line(int x, int y, int length, Element element) {
     for (int i = 0; i < length; i++) {
         this->print(x + i, y, element);
     }
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print_horizontal_line(int x, int y, int length, Styles style) {
     std::string style_string = styleToString(style);
     for (int i = 0; i < length; i++) {
@@ -52,32 +52,32 @@ void ConsolePrinter<Element>::print_horizontal_line(int x, int y, int length, St
     }
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print_horizontal_line(int x, int y, int length, Styles style, Color background, Color foreground) {
     this->console->change_color(background, foreground);
     this->print_horizontal_line(x, y, length, style);
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print_horizontal_line(int x, int y, int length, Element element, Color background, Color foreground) {
     this->console->change_color(background, foreground);
     this->print_horizontal_line(x, y, length, element);
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print_vertical_line(int x, int y, int length, Element element) {
     for (int i = 0; i < length; i++) {
         this->print(x, y + i, element);
     }
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print_vertical_line(int x, int y, int length, Element element, Color background, Color foreground) {
     this->console->change_color(background, foreground);
     this->print_vertical_line(x, y, length, element);
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print_vertical_line(int x, int y, int length, Styles style) {
     std::string style_string = styleToString(style);
     for (int i = 0; i < length; i++) {
@@ -85,13 +85,13 @@ void ConsolePrinter<Element>::print_vertical_line(int x, int y, int length, Styl
     }
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print_vertical_line(int x, int y, int length, Styles style, Color background, Color foreground) {
     this->console->change_color(background, foreground);
     this->print_vertical_line(x, y, length, style);
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print_rectangle(int x, int y, int width, int height, Element element, bool fill) {
     if (fill) {
         for (int i = 0; i < height; i++) {
@@ -105,13 +105,13 @@ void ConsolePrinter<Element>::print_rectangle(int x, int y, int width, int heigh
     }
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print_rectangle(int x, int y, int width, int height, Element element, Color background, Color foreground, bool fill) {
     this->console->change_color(background, foreground);
     this->print_rectangle(x, y, width, height, element, fill);
 }
 
-template<typename Element>
+template<class Element>
 void ConsolePrinter<Element>::print_rectangle(int x, int y, int width, int height, Styles style, bool fill) {
     std::string style_string = styleToString(style);
     if (fill) {
@@ -130,13 +130,13 @@ void ConsolePrinter<Element>::print_rectangle(int x, int y, int width, int heigh
     }
 }
 
-template<typename Element>
+template<class Element>
 void ConsolePrinter<Element>::print_rectangle(int x, int y, int width, int height, Styles style, Color background, Color foreground, bool fill) {
     this->console->change_color(background, foreground);
     this->print_rectangle(x, y, width, height, style, fill);
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print_matrix(int x, int y, std::vector<std::vector<Element>> matrix, Color background, Color foreground1, Color foreground2, Color foreground3) {
     this->console->change_color(background, foreground1);
     for (int i = 0; i < (int)matrix.size(); i++) {
@@ -154,7 +154,7 @@ void ConsolePrinter<Element>::print_matrix(int x, int y, std::vector<std::vector
     }
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print_diagonal_line(int x, int y, int width, int step, Element element, bool left_to_right) {
     step = std::abs(step);
     for (int i = 0; i < width; i += step) {
@@ -165,13 +165,13 @@ void ConsolePrinter<Element>::print_diagonal_line(int x, int y, int width, int s
     }
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print_diagonal_line(int x, int y, int width, int step, Element element, Color background, Color foreground, bool left_to_right) {
     this->console->change_color(background, foreground);
     this->print_diagonal_line(x, y, width, step, element, left_to_right);
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print_fill_diagonal(int x, int y, int width, int step, Element element, bool left_to_right) {
     step = std::abs(step);
     for (int i = width; i > 0; i -= step) {
@@ -183,7 +183,7 @@ void ConsolePrinter<Element>::print_fill_diagonal(int x, int y, int width, int s
     }
 }
 
-template <typename Element>
+template <class Element>
 void ConsolePrinter<Element>::print_fill_diagonal(int x, int y, int width, int step, Element element, Color background, Color foreground, bool left_to_right) {
     this->console->change_color(background, foreground);
     this->print_fill_diagonal(x, y, width, step, element, left_to_right);

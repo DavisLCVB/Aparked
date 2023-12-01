@@ -1,0 +1,10 @@
+#pragma once
+#ifndef _CONTROLCONSOLE_
+#define _CONTROLCONSOLE_
+
+#include <ConsoleFrames.hpp>
+#include <ConsolePrinter.hpp>
+#include <ConsoleReader.hpp>
+#include <ControlConsole.hpp>
+
+#endif // _CONTROLCONSOLE_
