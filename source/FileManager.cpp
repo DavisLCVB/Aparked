@@ -1,6 +1,6 @@
 #include <FileManager.hpp>
 
-const std::string FileManager::dir = "files\\";
+const std::string FileManager::dir = ".\\files\\";
 
 void FileManager::write(std::string file_name, std::string data) {
     if (!std::filesystem::exists(dir)) {
