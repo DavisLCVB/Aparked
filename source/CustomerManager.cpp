@@ -43,3 +43,11 @@ void CustomerManager::load_customers() {
         CustomerManager::add_customer(std::move(customer));
     }
 }
+
+int CustomerManager::get_customer_count() {
+    return CustomerManager::customer_count;
+}
+
+Customer *CustomerManager::get_customer(int index) {
+    return CustomerManager::customers.at(index).get();
+}

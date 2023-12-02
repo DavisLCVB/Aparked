@@ -11,6 +11,8 @@ Controller::Controller(ControlConsole *console, ConsolePrinter<std::string> *pri
     this->printer = printer;
     this->frames = frames;
     this->reader = reader;
+
+    this->parking_controller = std::make_unique<ParkingController>(printer);
     
     this->load_files();
     this->frames->init_screen();
@@ -19,6 +21,7 @@ Controller::Controller(ControlConsole *console, ConsolePrinter<std::string> *pri
     this->init_loading_bar();
     this->frames->paint_main_menu();
     this->receive_data();
+    this->paint_parking();
     _getch();
 }
 
@@ -33,8 +36,10 @@ void Controller::receive_data(){
     this->console->move_cursor(86, 11);
     std::string input = this->reader->read(30, Color::WHITE, Color::BLACK);
     this->console->clear_screen();
-    this->console->move_cursor(0, 0);
-    this->printer->print(0, 0, input);
+}
+
+void Controller::paint_parking() {
+    this->parking_controller->fill_parking();
 }
 
 void Controller::load_files(){

@@ -8,6 +8,7 @@
 #include <ConsoleReader.hpp>
 #include <ControlConsole.hpp>
 #include <CustomerManager.hpp>
+#include <ParkingController.hpp>
 
 class Controller {
 private:
@@ -15,6 +16,7 @@ private:
     ConsolePrinter<std::string> *printer;
     ConsoleFrames *frames;
     ConsoleReader *reader;
+    std::unique_ptr<ParkingController> parking_controller;
 
 public:
     Controller();
@@ -29,6 +31,7 @@ public:
     ConsoleReader *get_reader();
     void init_loading_bar();
     void receive_data();
+    void paint_parking();
     void load_files();
 };
 
