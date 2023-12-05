@@ -188,3 +188,8 @@ void ConsolePrinter<Element>::print_fill_diagonal(int x, int y, int width, int s
     this->console->change_color(background, foreground);
     this->print_fill_diagonal(x, y, width, step, element, left_to_right);
 }
+
+template <class Element>
+int ConsolePrinter<Element>::center_text(std::string e){
+    return (MAX_WIDTH - e.size()) / 2;
+}

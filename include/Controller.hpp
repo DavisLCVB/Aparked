@@ -30,9 +30,10 @@ public:
     ConsoleFrames *get_frames();
     ConsoleReader *get_reader();
     void init_loading_bar();
-    void receive_data();
+    std::string receive_data();
     void paint_parking();
     void load_files();
+    void init_controller();
 };
 
 #endif // CONTROLLER_HPP

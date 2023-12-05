@@ -40,7 +40,7 @@ public:
     /**
      * @brief Método para pintar las opciones en la consola.
      */
-    void paint_options();
+    void paint_options_main_menu();
 
     /**
      * @brief Método para preparar la consola.
@@ -52,6 +52,8 @@ public:
      */
     void reset_screen();
 
+    void init_selection(std::vector<std::string> options, int y_init);
+    
     /**
      * @brief Destructor de la clase ConsoleFrames.
      */

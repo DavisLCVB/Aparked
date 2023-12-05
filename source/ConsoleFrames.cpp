@@ -32,6 +32,23 @@ void ConsoleFrames::paint_main_menu() {
     printer->print(99, 26, "Grupo", Color::WHITE, Color::DARK_GRAY);
 }
 
+void ConsoleFrames::paint_options_main_menu(){
+    int y_init = 7;
+    std::vector<std::string> options;
+    std::string temp;
+    temp = "Estacionar veh";
+    temp.push_back(char(161));
+    temp += "culo";
+    options.push_back(temp);
+    temp = "Retirar veh";
+    temp.push_back(char(161));
+    temp += "culo";
+    options.push_back(temp);
+    temp = "Ver estacionamiento";
+    options.push_back(temp);
+    init_selection(options, y_init);
+}
+
 void ConsoleFrames::paint_loading_screen() {
     printer->get_console()->change_color(Color::WHITE, Color::BLACK, true);
     printer->get_console()->clear_screen();
@@ -49,6 +66,10 @@ void ConsoleFrames::reset_screen() {
     console->set_visible_cursor(true);
     console->change_color(Color::BLACK, Color::WHITE);
     console->clear_screen();
+}
+
+void ConsoleFrames::init_selection(std::vector<std::string> options, int y_init){
+    
 }
 
 ConsoleFrames::~ConsoleFrames() {

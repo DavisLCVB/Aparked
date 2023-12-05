@@ -290,6 +290,8 @@ public:
      * @param left_to_right Flag indicating whether the pattern should be printed from left to right (default: true).
      */
     void print_fill_diagonal(int x, int y, int width, int step, Element element, Color background, Color foreground, bool left_to_right = true);
+
+    int center_text(std::string e);
 };
 
 #include <ConsolePrinter.tpp>
