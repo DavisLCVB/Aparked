@@ -3,8 +3,6 @@
 ConsoleFrames::ConsoleFrames(ControlConsole *console, ConsolePrinter<std::string> *printer) {
     this->console = console;
     this->printer = printer;
-    this->option_controller = std::make_unique<OptionController>();
-    this->option_controller->set_printer(printer);
 }
 
 void ConsoleFrames::paint_main_menu() {
@@ -34,7 +32,7 @@ void ConsoleFrames::paint_main_menu() {
     printer->print(99, 26, "Grupo", Color::WHITE, Color::DARK_GRAY);
 }
 
-void ConsoleFrames::paint_options_main_menu() {
+std::string ConsoleFrames::paint_options_main_menu() {
     int y_init = 7;
     std::vector<std::string> options;
     std::string temp;
@@ -48,10 +46,9 @@ void ConsoleFrames::paint_options_main_menu() {
     options.push_back(temp);
     temp = "Ver estacionamiento";
     options.push_back(temp);
-    std::string op = init_selection(options, y_init);
-    printer->get_console()->change_color(Color::WHITE, Color::BLACK, true);
-    printer->get_console()->clear_screen();
-    printer->print(0, 0, op);
+    std::string op = init_main_selection(options, y_init);
+    this->console->change_color(Color::WHITE, Color::BLACK);
+    return op;
 }
 
 void ConsoleFrames::paint_loading_screen() {
@@ -73,14 +70,14 @@ void ConsoleFrames::reset_screen() {
     console->clear_screen();
 }
 
-std::string ConsoleFrames::init_selection(std::vector<std::string> options, int y_init) {
-    option_controller->set_options(options);
+std::string ConsoleFrames::init_main_selection(std::vector<std::string> options, int y_init) {
+    std::unique_ptr<OptionController> option_controller = std::make_unique<OptionController>(printer, options);
     option_controller->set_init_y(y_init);
-    option_controller->set_separator(1);
+    option_controller->set_separator(2);
     option_controller->set_background(Color::WHITE);
     option_controller->set_foreground(Color::BLACK);
     option_controller->set_selected_background(Color::CYAN);
-    option_controller->set_selected_foreground(Color::BLACK);
+    option_controller->set_selected_foreground(Color::WHITE);
     int ind = option_controller->init_options();
     return options.at(ind);
 }

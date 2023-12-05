@@ -19,7 +19,6 @@ class ConsoleFrames {
 private:
     ControlConsole *console;
     ConsolePrinter<std::string> *printer;
-    std::unique_ptr<OptionController> option_controller;
 
 public:
     /**
@@ -43,7 +42,7 @@ public:
     /**
      * @brief Método para pintar las opciones en la consola.
      */
-    void paint_options_main_menu();
+    std::string paint_options_main_menu();
 
     /**
      * @brief Método para preparar la consola.
@@ -55,7 +54,7 @@ public:
      */
     void reset_screen();
 
-    std::string init_selection(std::vector<std::string> options, int y_init);
+    std::string init_main_selection(std::vector<std::string> options, int y_init);
 
     /**
      * @brief Destructor de la clase ConsoleFrames.
