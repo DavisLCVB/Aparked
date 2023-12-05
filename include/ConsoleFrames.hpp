@@ -5,7 +5,9 @@
 #include <Color.hpp>
 #include <ConsolePrinter.hpp>
 #include <ControlConsole.hpp>
+#include <OptionController.hpp>
 #include <Resources.hpp>
+#include <memory>
 
 /**
  * @brief Clase que representa los marcos de la consola.
@@ -17,6 +19,7 @@ class ConsoleFrames {
 private:
     ControlConsole *console;
     ConsolePrinter<std::string> *printer;
+    std::unique_ptr<OptionController> option_controller;
 
 public:
     /**
@@ -52,8 +55,8 @@ public:
      */
     void reset_screen();
 
-    void init_selection(std::vector<std::string> options, int y_init);
-    
+    std::string init_selection(std::vector<std::string> options, int y_init);
+
     /**
      * @brief Destructor de la clase ConsoleFrames.
      */
