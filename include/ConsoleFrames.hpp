@@ -56,6 +56,8 @@ public:
 
     std::string init_main_selection(std::vector<std::string> options, int y_init);
 
+    void paint_customer_data();
+
     /**
      * @brief Destructor de la clase ConsoleFrames.
      */

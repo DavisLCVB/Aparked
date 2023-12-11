@@ -46,6 +46,8 @@ std::string ConsoleFrames::paint_options_main_menu() {
     options.push_back(temp);
     temp = "Ver estacionamiento";
     options.push_back(temp);
+    temp = "Salir";
+    options.push_back(temp);
     std::string op = init_main_selection(options, y_init);
     this->console->change_color(Color::WHITE, Color::BLACK);
     return op;
@@ -80,6 +82,19 @@ std::string ConsoleFrames::init_main_selection(std::vector<std::string> options,
     option_controller->set_selected_foreground(Color::WHITE);
     int ind = option_controller->init_options();
     return options.at(ind);
+}
+
+void ConsoleFrames::paint_customer_data(){
+    this->printer->get_console()->change_color(Color::WHITE, Color::BLACK, true);
+    this->printer->get_console()->clear_screen();
+    this->printer->print_rectangle(7, 10, 45, 3, Styles::Double, Color::WHITE, Color::BLACK);
+    this->printer->print_rectangle(7, 19, 45, 3, Styles::Double, Color::WHITE, Color::BLACK);
+    this->printer->print_rectangle(69, 10, 45, 3, Styles::Double, Color::WHITE, Color::BLACK);
+    this->printer->print_rectangle(69, 19, 45, 3, Styles::Double, Color::WHITE, Color::BLACK);
+    this->printer->print(7, 9, "Ingrese su nombre:", Color::BLACK, Color::WHITE);
+    this->printer->print(7, 18, "Ingrese su edad:", Color::BLACK, Color::WHITE);
+    this->printer->print(69, 9, "Ingrese su placa:", Color::BLACK, Color::WHITE);
+    this->printer->print(69, 18, "Escriba \"Si\" si es miembro", Color::BLACK, Color::WHITE);
 }
 
 ConsoleFrames::~ConsoleFrames() {

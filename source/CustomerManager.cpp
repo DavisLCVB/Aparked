@@ -22,7 +22,7 @@ void CustomerManager::save_customers() {
 
 void CustomerManager::load_customers() {
     std::vector<std::string> lines = FileManager::read("customers.txt");
-    if(lines.empty()) {
+    if (lines.empty()) {
         printf("No customers found, creating new file...\n");
         save_customers();
         return;
@@ -42,6 +42,10 @@ void CustomerManager::load_customers() {
         customer->get_parking_space()->set_y(std::stoi(lines.at(i * CustomerManager::SIZE_DATA + 8)));
         CustomerManager::add_customer(std::move(customer));
     }
+}
+
+void CustomerManager::get_info_customer() {
+    
 }
 
 int CustomerManager::get_customer_count() {

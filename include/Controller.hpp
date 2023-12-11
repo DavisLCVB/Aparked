@@ -17,6 +17,7 @@ private:
     ConsoleFrames *frames;
     ConsoleReader *reader;
     std::unique_ptr<ParkingController> parking_controller;
+    bool is_running = true;
 
 public:
     Controller();
@@ -34,6 +35,12 @@ public:
     void paint_parking();
     void load_files();
     void init_controller();
+    void init_program();
+    void show_parking();
+    void park_vehicle();
+    void remove_vehicle();
+    void get_info();
+    void verify_info();
 };
 
 #endif // CONTROLLER_HPP

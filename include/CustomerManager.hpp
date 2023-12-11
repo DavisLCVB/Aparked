@@ -23,6 +23,7 @@ public:
     static void load_customers();
     static int get_customer_count();
     static Customer *get_customer(int index);
+    static void get_info_customer();
 };
 
 #endif // CUSTOMER_MANAGER_HPP

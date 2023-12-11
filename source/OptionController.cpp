@@ -62,11 +62,17 @@ Color OptionController::get_selected_foreground() {
 }
 
 void OptionController::set_init_y(int init_y) {
-    this->init_y = init_y;
+    if (init_y >= 0)
+        this->init_y = init_y;
+    else
+        this->init_y = 0;
 }
 
 void OptionController::set_separator(int separator) {
-    this->separator = separator;
+    if (separator >= 0)
+        this->separator = separator;
+    else
+        this->separator = 1;
 }
 
 int OptionController::get_init_y() {
@@ -102,6 +108,9 @@ int OptionController::init_options() {
         key = _getch();
         switch (key) {
         case static_cast<int>(Keys::UP):
+        case static_cast<int>(Keys::LEFT):
+        case static_cast<int>(Keys::W):
+        case static_cast<int>(Keys::A):
             for (int i = 0; i < (int)this->options.size(); i++) {
                 if (this->options.at(i).first) {
                     this->options.at(i).first = false;
@@ -116,6 +125,9 @@ int OptionController::init_options() {
             this->paint_options();
             break;
         case static_cast<int>(Keys::DOWN):
+        case static_cast<int>(Keys::RIGHT):
+        case static_cast<int>(Keys::S):
+        case static_cast<int>(Keys::D):
             for (int i = 0; i < (int)this->options.size(); i++) {
                 if (this->options.at(i).first) {
                     this->options.at(i).first = false;

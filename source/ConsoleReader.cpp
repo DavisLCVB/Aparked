@@ -52,6 +52,7 @@ std::string ConsoleReader::read(Color background, Color foreground) {
 }
 
 std::string ConsoleReader::read(int width) {
+    this->console->set_visible_cursor(true);
     POINT cursor_position = this->console->get_cursor_position();
     long x = cursor_position.x;
     long y = cursor_position.y;
@@ -73,6 +74,7 @@ std::string ConsoleReader::read(int width) {
             break;
         }
     }
+    this->console->set_visible_cursor(false);
     return input;
 }
 
